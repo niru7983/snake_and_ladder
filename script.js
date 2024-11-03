@@ -48,20 +48,18 @@ function createBoard() {
         boardElement.appendChild(square);
     }
     updatePlayerOnBoard();
+    drawConnections();
 }
 
 function updatePlayerOnBoard() {
-    // Clear previous positions
     const squares = document.querySelectorAll('.square');
     squares.forEach(square => square.classList.remove('player', 'ai'));
 
-    // Mark player position
     if (playerPosition > 0 && playerPosition <= 100) {
         const playerSquare = [...squares].find(square => square.dataset.index == playerPosition);
         playerSquare.classList.add('player');
     }
 
-    // Mark AI position
     if (aiPosition > 0 && aiPosition <= 100) {
         const aiSquare = [...squares].find(square => square.dataset.index == aiPosition);
         aiSquare.classList.add('ai');
@@ -74,33 +72,4 @@ function rollDice() {
 
 function updatePosition(position, roll) {
     const newPosition = position + roll;
-    if (newPosition > 100) return position; // Stay in the same position if roll exceeds 100
-    return snakes[newPosition] || ladders[newPosition] || newPosition; // Check for snakes or ladders
-}
-
-function checkWin(position, player) {
-    if (position === 100) {
-        messageElement.innerText = `${player} Wins!`;
-        rollButton.disabled = true;
-        return true;
-    }
-    return false;
-}
-
-rollButton.addEventListener('click', () => {
-    const playerRoll = rollDice();
-    document.getElementById('dice-number').innerText = playerRoll; // Display dice value
-    playerPosition = updatePosition(playerPosition, playerRoll);
-    playerPosElement.innerText = playerPosition;
-    updatePlayerOnBoard(); // Update board with player position
-
-    if (!checkWin(playerPosition, 'Player')) {
-        const aiRoll = rollDice();
-        aiPosition = updatePosition(aiPosition, aiRoll);
-        aiPosElement.innerText = aiPosition;
-        updatePlayerOnBoard(); // Update board with AI position
-        checkWin(aiPosition, 'AI');
-    }
-});
-
-createBoard();
+    if (newPosition > 100
