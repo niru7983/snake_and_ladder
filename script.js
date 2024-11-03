@@ -35,7 +35,7 @@ function createBoard() {
     for (let i = 100; i >= 1; i--) {
         const square = document.createElement('div');
         square.className = 'square';
-        square.dataset.index = i; // Store index for reference
+        square.dataset.index = i;
 
         if (snakes[i]) {
             square.innerHTML = `<img src="images/snake.png" class="snake" alt="Snake" /><span>${i}</span>`;
@@ -47,8 +47,42 @@ function createBoard() {
 
         boardElement.appendChild(square);
     }
-    updatePlayerOnBoard();
     drawConnections();
+    updatePlayerOnBoard();
+}
+
+function drawConnections() {
+    Object.keys(snakes).forEach(head => {
+        const tail = snakes[head];
+        drawLine(head, tail, 'snake');
+    });
+
+    Object.keys(ladders).forEach(bottom => {
+        const top = ladders[bottom];
+        drawLine(bottom, top, 'ladder');
+    });
+}
+
+function drawLine(start, end, type) {
+    const startSquare = document.querySelector(`.square[data-index="${start}"]`);
+    const endSquare = document.querySelector(`.square[data-index="${end}"]`);
+
+    const startRect = startSquare.getBoundingClientRect();
+    const endRect = endSquare.getBoundingClientRect();
+
+    const connection = document.createElement('div');
+    connection.className = 'connection';
+    const length = Math.sqrt(
+        Math.pow(endRect.left - startRect.left, 2) +
+        Math.pow(endRect.top - startRect.top, 2)
+    );
+
+    const angle = Math.atan2(endRect.top - startRect.top, endRect.left - startRect.left) * (180 / Math.PI);
+
+    connection.style.width = `${length}px`;
+    connection.style.transform = `translate(${startRect.left + 25}px, ${startRect.top + 25}px) rotate(${angle}deg)`;
+    
+    boardElement.appendChild(connection);
 }
 
 function updatePlayerOnBoard() {
@@ -72,4 +106,33 @@ function rollDice() {
 
 function updatePosition(position, roll) {
     const newPosition = position + roll;
-    if (newPosition > 100
+    if (newPosition > 100) return position; // Stay in the same position if roll exceeds 100
+    return snakes[newPosition] || ladders[newPosition] || newPosition; // Check for snakes or ladders
+}
+
+function checkWin(position, player) {
+    if (position === 100) {
+        messageElement.innerText = `${player} Wins!`;
+        rollButton.disabled = true;
+        return true;
+    }
+    return false;
+}
+
+rollButton.addEventListener('click', () => {
+    const playerRoll = rollDice();
+    document.getElementById('dice-number').innerText = playerRoll; // Display dice value
+    playerPosition = updatePosition(playerPosition, playerRoll);
+    playerPosElement.innerText = playerPosition;
+    updatePlayerOnBoard(); // Update board with player position
+
+    if (!checkWin(playerPosition, 'Player')) {
+        const aiRoll = rollDice();
+        aiPosition = updatePosition(aiPosition, aiRoll);
+        aiPosElement.innerText = aiPosition;
+        updatePlayerOnBoard(); // Update board with AI position
+        checkWin(aiPosition, 'AI');
+    }
+});
+
+createBoard();
