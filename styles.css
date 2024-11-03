@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+    margin: 20px auto;
+}
+
+.square {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.snake {
+    background-color: red;
+}
+
+.ladder {
+    background-color: green;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.scoreboard {
+    margin-top: 10px;
+}
