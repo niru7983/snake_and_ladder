@@ -27,24 +27,26 @@ body {
     position: relative;
 }
 
-.snake {
-    display: block;
-    font-size: 24px;
-    color: red;
-}
-
-.ladder {
-    display: block;
-    font-size: 24px;
-    color: green;
-}
-
 .player {
     background-color: rgba(0, 0, 255, 0.5); /* Blue for player */
 }
 
 .ai {
     background-color: rgba(255, 0, 0, 0.5); /* Red for AI */
+}
+
+.snake {
+    width: 24px; /* Adjust size as needed */
+    height: auto;
+    position: absolute;
+    bottom: 5px; /* Position it inside the square */
+}
+
+.ladder {
+    width: 24px; /* Adjust size as needed */
+    height: auto;
+    position: absolute;
+    bottom: 5px; /* Position it inside the square */
 }
 
 .controls {
