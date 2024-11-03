@@ -24,14 +24,19 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #fff;
+    position: relative;
 }
 
 .snake {
-    background-color: red;
+    display: block;
+    font-size: 24px;
+    color: red;
 }
 
 .ladder {
-    background-color: green;
+    display: block;
+    font-size: 24px;
+    color: green;
 }
 
 .controls {
