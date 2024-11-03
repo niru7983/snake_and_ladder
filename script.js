@@ -38,9 +38,9 @@ function createBoard() {
         square.dataset.index = i; // Store index for reference
 
         if (snakes[i]) {
-            square.innerHTML = `<span class="snake">🐍</span><span>${i}</span>`;
+            square.innerHTML = `<img src="images/snake.png" class="snake" alt="Snake" /><span>${i}</span>`;
         } else if (ladders[i]) {
-            square.innerHTML = `<span class="ladder">🪜</span><span>${i}</span>`;
+            square.innerHTML = `<img src="images/ladder.png" class="ladder" alt="Ladder" /><span>${i}</span>`;
         } else {
             square.innerText = i;
         }
@@ -73,10 +73,9 @@ function rollDice() {
 }
 
 function updatePosition(position, roll) {
-    position += roll;
-    if (position > 100) return position; // Can't move beyond 100
-    position = snakes[position] || ladders[position] || position; // Check for snakes or ladders
-    return position;
+    const newPosition = position + roll;
+    if (newPosition > 100) return position; // Stay in the same position if roll exceeds 100
+    return snakes[newPosition] || ladders[newPosition] || newPosition; // Check for snakes or ladders
 }
 
 function checkWin(position, player) {
