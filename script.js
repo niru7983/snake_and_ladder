@@ -35,7 +35,16 @@ function createBoard() {
     for (let i = 100; i >= 1; i--) {
         const square = document.createElement('div');
         square.className = 'square';
-        square.innerText = i;
+        
+        // Check if there is a snake or ladder in the square
+        if (snakes[i]) {
+            square.innerHTML = `<span class="snake">🐍</span><span>${i}</span>`;
+        } else if (ladders[i]) {
+            square.innerHTML = `<span class="ladder">🪜</span><span>${i}</span>`;
+        } else {
+            square.innerText = i;
+        }
+        
         boardElement.appendChild(square);
     }
 }
