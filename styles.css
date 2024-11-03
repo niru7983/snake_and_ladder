@@ -39,6 +39,14 @@ body {
     color: green;
 }
 
+.player {
+    background-color: rgba(0, 0, 255, 0.5); /* Blue for player */
+}
+
+.ai {
+    background-color: rgba(255, 0, 0, 0.5); /* Red for AI */
+}
+
 .controls {
     margin-top: 20px;
 }
