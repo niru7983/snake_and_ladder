@@ -14,7 +14,7 @@ body {
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 50px);
     margin: 20px auto;
-    position: relative; /* Required for absolute positioning of lines */
+    position: relative;
 }
 
 .square {
@@ -50,16 +50,11 @@ body {
     bottom: 5px; /* Position it inside the square */
 }
 
-.snake-line {
+.connection {
     position: absolute;
-    height: 2px;
-    background-color: red; /* Color for snakes */
-}
-
-.ladder-line {
-    position: absolute;
-    height: 2px;
-    background-color: green; /* Color for ladders */
+    width: 2px;
+    background-color: black; /* Color of the connection */
+    transform-origin: 0 0;
 }
 
 .controls {
