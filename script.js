@@ -38,9 +38,9 @@ function createBoard() {
         square.dataset.index = i;
 
         if (snakes[i]) {
-            square.innerHTML = `<img src="images/snake.png" class="snake" alt="Snake" />🐍<span>${i}</span>`;
+            square.innerHTML = `<img src="snake.png" class="snake" alt="Snake" />🐍<span>${i}</span>`;
         } else if (ladders[i]) {
-            square.innerHTML = `<img src="images/ladder.png" class="ladder" alt="Ladder" />🪜<span>${i}</span>`;
+            square.innerHTML = `<img src="ladder.png" class="ladder" alt="Ladder" />🪜<span>${i}</span>`;
         } else {
             square.innerText = i;
         }
