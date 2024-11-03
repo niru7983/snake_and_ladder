@@ -35,8 +35,8 @@ function createBoard() {
     for (let i = 100; i >= 1; i--) {
         const square = document.createElement('div');
         square.className = 'square';
-        
-        // Check if there is a snake or ladder in the square
+        square.dataset.index = i; // Store index for reference
+
         if (snakes[i]) {
             square.innerHTML = `<span class="snake">🐍</span><span>${i}</span>`;
         } else if (ladders[i]) {
@@ -44,8 +44,27 @@ function createBoard() {
         } else {
             square.innerText = i;
         }
-        
+
         boardElement.appendChild(square);
+    }
+    updatePlayerOnBoard();
+}
+
+function updatePlayerOnBoard() {
+    // Clear previous positions
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(square => square.classList.remove('player', 'ai'));
+
+    // Mark player position
+    if (playerPosition > 0 && playerPosition <= 100) {
+        const playerSquare = [...squares].find(square => square.dataset.index == playerPosition);
+        playerSquare.classList.add('player');
+    }
+
+    // Mark AI position
+    if (aiPosition > 0 && aiPosition <= 100) {
+        const aiSquare = [...squares].find(square => square.dataset.index == aiPosition);
+        aiSquare.classList.add('ai');
     }
 }
 
@@ -71,12 +90,16 @@ function checkWin(position, player) {
 
 rollButton.addEventListener('click', () => {
     const playerRoll = rollDice();
+    document.getElementById('dice-number').innerText = playerRoll; // Display dice value
     playerPosition = updatePosition(playerPosition, playerRoll);
     playerPosElement.innerText = playerPosition;
+    updatePlayerOnBoard(); // Update board with player position
+
     if (!checkWin(playerPosition, 'Player')) {
         const aiRoll = rollDice();
         aiPosition = updatePosition(aiPosition, aiRoll);
         aiPosElement.innerText = aiPosition;
+        updatePlayerOnBoard(); // Update board with AI position
         checkWin(aiPosition, 'AI');
     }
 });
