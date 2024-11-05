@@ -7,10 +7,7 @@ body {
 .container {
     margin: 20px auto;
     max-width: 600px;
-    background-image: url('board_image.png');
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
+    
 }
 
 #board {
@@ -19,6 +16,10 @@ body {
     grid-template-rows: repeat(10, 50px);
     margin: 20px auto;
     position: relative;
+    background-image: url('board_image.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
 .square {
