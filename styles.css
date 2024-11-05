@@ -7,7 +7,7 @@ body {
 .container {
     margin: 20px auto;
     max-width: 600px;
-    background: img src= "board_image.png";
+    background-image: url('board_image.png');
     background-size: cover;
     background-position: center;
     overflow: hidden;
