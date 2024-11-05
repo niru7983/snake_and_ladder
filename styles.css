@@ -7,6 +7,10 @@ body {
 .container {
     margin: 20px auto;
     max-width: 600px;
+    background: url('Images/board_image.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
 #board {
