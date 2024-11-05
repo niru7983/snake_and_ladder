@@ -14,11 +14,12 @@ body {
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 50px);
-    margin: 20px auto;
-    position: relative;
+
     background-image: url('board_image.png');
     background-size: cover;
     background-position: center;
+    margin: 20px auto;
+    position: relative;
     overflow: hidden;
 }
 
